@@ -10,7 +10,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
 
 # Load the dataset from the CSV file
-data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/car predict 2025 assum.csv')
+data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/car_data_2020_2025.csv')
 
 # Combine `Brand` and `Model` into `Name`
 data['Name'] = data['Brand'] + ' ' + data['Model']
@@ -73,7 +73,7 @@ def run_streamlit_app():
 
     # Collect user inputs for the car's features
     company = st.selectbox('Car Brand and Model', ['Toyota Corolla', 'Honda Civic', 'Ford Focus', 'BMW 3 Series', 'Audi A4', 'Mercedes Benz C-Class', 'Volkswagen Golf', 'Hyundai Elantra', 'Kia Seltos', 'Nissan Altima'])
-    year = st.number_input('Year of Manufacture', min_value=2000, max_value=2024, step=1)
+    year = st.number_input('Year of Manufacture', min_value=2000, max_value=2025, step=1)
     mileage = st.number_input('Mileage (in Km)', min_value=0.0, max_value=500000.0, step=0.1)
     fuel_type = st.selectbox('Fuel Type', ['Petrol', 'Diesel'])
     transmission = st.selectbox('Transmission', ['Manual', 'Automatic'])
