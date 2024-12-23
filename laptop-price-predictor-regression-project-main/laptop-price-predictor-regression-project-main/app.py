@@ -65,7 +65,7 @@ with open('car_price_predictor_model.pkl', 'wb') as f:
 
 print("Model training complete and saved as car_price_predictor_model.pkl")
 
-# Load the answers for the chatbot
+# Load the answers for the chatbot (ensure path is correct)
 try:
     answers_df = pd.read_csv('./answers.csv')  # Ensure correct path
     print("Answers loaded successfully.")
@@ -74,6 +74,12 @@ except Exception as e:
 
 # Function to find the answer to a chatbot question
 def get_answer(question):
+    # Make sure the answers_df is accessible globally
+    if 'answers_df' not in globals():
+        print("Answers DataFrame not loaded.")
+        return "Sorry, I didn't understand that. Can you please rephrase?"
+    
+    # Now, perform the lookup
     answer_row = answers_df[answers_df['Question'].str.contains(question, case=False, na=False)]
     if not answer_row.empty:
         return answer_row['Answer'].values[0]
