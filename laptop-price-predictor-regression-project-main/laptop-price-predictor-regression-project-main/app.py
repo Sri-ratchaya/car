@@ -2,41 +2,101 @@ import pandas as pd
 import numpy as np
 import pickle
 import streamlit as st
+import pandas as pd
+import numpy as np
+import pickle
+import streamlit as st
+from sklearn.model_selection import train_test_split
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.impute import SimpleImputer
 
 # Load the dataset from the CSV file
 data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/car predict 2025 assum.csv')
+
+
+
 
 # Combine `Brand` and `Model` into `Name`
 data['Name'] = data['Brand'] + ' ' + data['Model']
 data.drop(['Brand', 'Model'], axis=1, inplace=True)
 
-# Load pre-trained model
-with open('car_price_predictor_model.pkl', 'rb') as f:
-    model = pickle.load(f)
+# Define features (X) and target (y)
+X = data.drop(['Price'], axis=1)
+y = data['Price']
 
-# Streamlit app
-st.title("Car Price Prediction App")
+# Define numeric and categorical columns
+numeric_features = ['Year', 'Mileage']
+categorical_features = ['Name', 'Fuel_Type', 'Transmission']
 
-# Dynamic inputs from dataset
-selected_name = st.selectbox("Select Car Name", data['Name'].unique())
-selected_year = st.selectbox("Select Year", sorted(data['Year'].unique()))
-selected_mileage = st.slider("Select Mileage (in kmpl)", min_value=8.0, max_value=18.0, step=0.1)
-selected_fuel_type = st.selectbox("Select Fuel Type", data['Fuel_Type'].unique())
-selected_transmission = st.selectbox("Select Transmission", data['Transmission'].unique())
+# Preprocessing for numeric data
+numeric_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='mean')),
+    ('scaler', StandardScaler())
+])
 
-# Prepare input for prediction
-if st.button("Predict Price"):
-    # Create a DataFrame for the input
-    query_df = pd.DataFrame([{
-        'Name': selected_name,
-        'Year': selected_year,
-        'Mileage': selected_mileage,
-        'Fuel_Type': selected_fuel_type,
-        'Transmission': selected_transmission
-    }])
+# Preprocessing for categorical data
+categorical_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='most_frequent')),
+    ('onehot', OneHotEncoder(handle_unknown='ignore'))
+])
 
-    # Predict the price
-    predicted_price = model.predict(query_df)[0]
+# Combine preprocessors into a single column transformer
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', numeric_transformer, numeric_features),
+        ('cat', categorical_transformer, categorical_features)
+    ])
 
-    # Display the result
-    st.title(f"The predicted price of the car is: ₹{int(predicted_price):,}")
+# Create a pipeline with preprocessing and the model
+model_pipeline = Pipeline(steps=[
+    ('preprocessor', preprocessor),
+    ('regressor', RandomForestRegressor(n_estimators=100, random_state=42))
+])
+
+# Split the data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train the model
+model_pipeline.fit(X_train, y_train)
+
+# Save the trained model to a .pkl file
+with open('car_price_predictor_model.pkl', 'wb') as f:
+    pickle.dump(model_pipeline, f)
+
+print("Model training complete and saved as car_price_predictor_model.pkl")
+
+# Streamlit App Code
+def run_streamlit_app():
+    # Load the trained model
+    with open('car_price_predictor_model.pkl', 'rb') as f:
+        model = pickle.load(f)
+
+    # Set up the title and description of the web app
+    st.title("Car Price Prediction App")
+    st.write("This app predicts the price of a car based on several features such as brand, year, mileage, and more.")
+
+    # Collect user inputs for the car's features
+    company = st.selectbox('Car Brand and Model', ['Toyota Corolla', 'Honda Civic', 'Ford Focus', 'BMW 3 Series', 'Audi A4', 'Mercedes Benz C-Class', 'Volkswagen Golf', 'Hyundai Elantra', 'Kia Seltos', 'Nissan Altima'])
+    year = st.number_input('Year of Manufacture', min_value=2000, max_value=2024, step=1)
+    mileage = st.number_input('Mileage (in Km)', min_value=0.0, max_value=500000.0, step=0.1)
+    fuel_type = st.selectbox('Fuel Type', ['Petrol', 'Diesel'])
+    transmission = st.selectbox('Transmission', ['Manual', 'Automatic'])
+
+    # Predict the price when the user clicks the button
+    if st.button('Predict Price'):
+        # Prepare the data for prediction
+        query = np.array([company, year, mileage, fuel_type, transmission])
+        query = query.reshape(1, -1)  # Ensure it's a 2D array (1 sample, n features)
+
+        # Get the predicted price
+        predicted_price = int(model.predict(query)[0])  # Get the prediction from the model
+
+        # Display the predicted price
+        st.title(f"The predicted price of this car is ₹{predicted_price}")
+
+# Running Streamlit app
+if __name__ == "__main__":
+    run_streamlit_app()
