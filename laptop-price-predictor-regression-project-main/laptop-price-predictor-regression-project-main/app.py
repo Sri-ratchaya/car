@@ -2,13 +2,65 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import pickle
+import pandas as pd
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestRegressor
+import pickle
+
+# Load your data
+car_data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/dataset.csv') 
+
+# Extract features and target
+X = df.drop('Price', axis=1)
+y = df['Price']
+
+# Define numeric and categorical columns
+numeric_features = ['Year', 'Kilometers_Driven', 'Engine', 'Power', 'Seats']
+categorical_features = ['Name', 'Location', 'Fuel_Type', 'Transmission', 'Owner_Type']
+
+# Preprocessing for numeric features: Impute missing values and scale
+numeric_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='mean')),   # Impute missing values with the mean
+    ('scaler', StandardScaler())                   # Scale features to standardize them
+])
+
+# Preprocessing for categorical features: Impute missing values and apply OneHotEncoding
+categorical_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='most_frequent')),   # Impute missing values with the most frequent category
+    ('onehot', OneHotEncoder(handle_unknown='ignore'))      # Apply OneHotEncoding
+])
+
+# Combine both numeric and categorical transformations into a single preprocessor
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', numeric_transformer, numeric_features),
+        ('cat', categorical_transformer, categorical_features)
+    ])
+
+# Create the model pipeline which first preprocesses data and then fits the RandomForest model
+model = Pipeline(steps=[
+    ('preprocessor', preprocessor),
+    ('regressor', RandomForestRegressor())
+])
+
+# Train the model
+model.fit(X, y)
+
+# Save the model
+with open('laptop_price_predictor_model.pkl', 'wb') as f:
+    pickle.dump(model, f)
+
+# Now, you can use this model to make predictions or deploy it further
 
 # Load the pre-trained model and scaler
 pipe = pickle.load(open('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/rf_model.pkl', 'rb'))
 scaler = pickle.load(open('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/scaler.pkl', 'rb'))
 
 # Load the car dataset for user inputs
-car_data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/dataset.csv')   # Adjust path if necessary
+  # Adjust path if necessary
 
 # Set up the title and description of the web app
 st.title("Car Price Prediction App")
