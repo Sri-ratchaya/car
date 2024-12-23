@@ -1,0 +1,101 @@
+Brand,Model,Year,Mileage,Fuel_Type,Transmission,Price
+Hyundai,Elantra,2023,15.7,Petrol,Manual,20318.72
+Hyundai,Elantra,2021,18.5,Diesel,Manual,45015.84
+BMW,3 Series,2024,19.0,Petrol,Automatic,48270.27
+Toyota,Corolla,2022,18.8,Petrol,Manual,48947.11
+Nissan,Altima,2023,7.2,Petrol,Automatic,31989.09
+Mercedes,Benz C-Class,2020,5.6,Diesel,Manual,49334.24
+Mercedes,Benz C-Class,2023,8.8,Diesel,Automatic,39228.01
+Honda,Civic,2020,10.9,Petrol,Manual,26678.03
+Ford,Focus,2021,12.5,Petrol,Manual,48602.63
+Hyundai,Elantra,2021,8.8,Diesel,Manual,35429.89
+Volkswagen,Golf,2024,6.7,Diesel,Automatic,28978.5
+Honda,Civic,2024,13.1,Petrol,Automatic,24458.47
+Mercedes,Benz C-Class,2025,12.2,Petrol,Automatic,34607.93
+Nissan,Altima,2024,11.3,Petrol,Automatic,44869.56
+BMW,3 Series,2022,5.3,Diesel,Manual,31566.65
+BMW,3 Series,2020,7.1,Diesel,Automatic,26651.4
+BMW,3 Series,2020,19.1,Petrol,Manual,42794.83
+Hyundai,Elantra,2023,17.2,Diesel,Manual,47387.68
+Toyota,Corolla,2025,8.7,Petrol,Manual,48898.71
+Toyota,Corolla,2021,8.3,Petrol,Automatic,39972.66
+Kia,Seltos,2023,7.6,Petrol,Manual,25524.1
+Audi,A4,2021,7.6,Petrol,Manual,49348.17
+BMW,3 Series,2022,12.2,Diesel,Automatic,47821.47
+Kia,Seltos,2025,18.7,Petrol,Manual,25465.13
+Honda,Civic,2022,13.9,Petrol,Manual,27716.71
+Ford,Focus,2024,19.8,Diesel,Manual,30330.21
+Hyundai,Elantra,2024,6.0,Diesel,Manual,23265.53
+BMW,3 Series,2021,13.8,Petrol,Manual,47895.03
+Audi,A4,2022,6.3,Petrol,Manual,37187.23
+Nissan,Altima,2025,9.8,Diesel,Manual,46035.36
+BMW,3 Series,2020,16.2,Petrol,Automatic,37752.27
+Kia,Seltos,2025,9.0,Diesel,Manual,21142.11
+BMW,3 Series,2024,18.8,Petrol,Manual,22525.65
+Volkswagen,Golf,2025,18.2,Diesel,Automatic,48112.32
+Ford,Focus,2022,19.6,Petrol,Automatic,27730.46
+Kia,Seltos,2024,11.4,Diesel,Automatic,21379.85
+Kia,Seltos,2020,13.5,Petrol,Manual,44431.63
+Toyota,Corolla,2021,12.1,Diesel,Automatic,21750.74
+Hyundai,Elantra,2023,8.8,Diesel,Automatic,42461.12
+Mercedes,Benz C-Class,2023,10.2,Petrol,Manual,41017.57
+Hyundai,Elantra,2022,20.0,Diesel,Manual,20054.71
+Mercedes,Benz C-Class,2022,15.3,Petrol,Manual,42232.21
+Ford,Focus,2025,7.9,Petrol,Manual,47518.43
+Kia,Seltos,2020,9.2,Diesel,Manual,26440.19
+Hyundai,Elantra,2025,13.4,Petrol,Manual,26656.19
+Honda,Civic,2023,17.1,Petrol,Automatic,28618.19
+BMW,3 Series,2020,19.6,Petrol,Automatic,43167.31
+Nissan,Altima,2021,14.2,Diesel,Automatic,42154.25
+Audi,A4,2025,8.2,Diesel,Automatic,42642.47
+Kia,Seltos,2020,10.7,Diesel,Automatic,47370.35
+Nissan,Altima,2021,6.5,Petrol,Automatic,43693.54
+Ford,Focus,2020,9.8,Diesel,Manual,47990.73
+Mercedes,Benz C-Class,2025,16.3,Diesel,Manual,48345.19
+Nissan,Altima,2021,19.7,Petrol,Manual,34100.53
+Ford,Focus,2022,12.2,Diesel,Manual,44987.8
+Kia,Seltos,2022,8.5,Diesel,Manual,45577.67
+Honda,Civic,2021,10.4,Petrol,Automatic,41468.66
+Ford,Focus,2025,13.6,Petrol,Automatic,41082.58
+Honda,Civic,2021,5.3,Petrol,Automatic,33521.28
+Mercedes,Benz C-Class,2021,15.0,Petrol,Automatic,31434.65
+Kia,Seltos,2020,6.9,Petrol,Manual,39652.6
+Mercedes,Benz C-Class,2020,6.6,Petrol,Manual,33403.5
+Volkswagen,Golf,2020,15.0,Diesel,Automatic,45257.77
+Nissan,Altima,2024,10.4,Petrol,Manual,43291.85
+Nissan,Altima,2023,8.5,Petrol,Manual,20591.1
+Kia,Seltos,2025,8.2,Diesel,Manual,40733.77
+Toyota,Corolla,2024,8.7,Petrol,Manual,49038.33
+BMW,3 Series,2022,12.3,Diesel,Manual,48939.46
+Honda,Civic,2022,15.0,Petrol,Automatic,36818.49
+Kia,Seltos,2023,13.9,Diesel,Automatic,31038.43
+Audi,A4,2020,15.4,Petrol,Automatic,23948.99
+Mercedes,Benz C-Class,2023,7.0,Petrol,Manual,44887.77
+Ford,Focus,2020,6.7,Petrol,Manual,27646.28
+Mercedes,Benz C-Class,2022,17.1,Petrol,Automatic,49884.95
+Honda,Civic,2025,11.3,Petrol,Automatic,39229.52
+Nissan,Altima,2020,14.8,Petrol,Automatic,48315.65
+Ford,Focus,2024,16.7,Petrol,Manual,45827.6
+Nissan,Altima,2024,9.9,Petrol,Automatic,39264.53
+Toyota,Corolla,2024,5.3,Diesel,Automatic,40476.38
+Hyundai,Elantra,2025,9.9,Petrol,Manual,38209.29
+Volkswagen,Golf,2024,14.9,Petrol,Automatic,46120.76
+Volkswagen,Golf,2021,5.8,Petrol,Automatic,24175.28
+Hyundai,Elantra,2024,9.7,Petrol,Manual,48091.4
+Volkswagen,Golf,2025,17.4,Diesel,Manual,42674.52
+BMW,3 Series,2023,10.3,Diesel,Manual,47647.75
+Ford,Focus,2024,9.4,Petrol,Manual,24220.96
+Hyundai,Elantra,2022,17.2,Petrol,Automatic,24286.07
+BMW,3 Series,2023,8.1,Petrol,Automatic,44601.01
+Ford,Focus,2020,8.8,Petrol,Manual,24473.27
+Toyota,Corolla,2021,13.1,Diesel,Automatic,39143.62
+Toyota,Corolla,2023,15.2,Diesel,Automatic,32854.44
+Audi,A4,2024,10.4,Petrol,Manual,31764.79
+Ford,Focus,2024,8.1,Petrol,Manual,41309.59
+Honda,Civic,2024,8.4,Diesel,Automatic,34719.16
+Audi,A4,2024,8.7,Petrol,Manual,30453.12
+Toyota,Corolla,2025,11.4,Petrol,Automatic,47215.14
+Honda,Civic,2022,15.2,Diesel,Automatic,43637.1
+Kia,Seltos,2022,8.1,Diesel,Manual,35723.16
+Honda,Civic,2024,11.2,Petrol,Manual,41745.79
+Toyota,Corolla,2025,6.0,Petrol,Manual,31660.26
