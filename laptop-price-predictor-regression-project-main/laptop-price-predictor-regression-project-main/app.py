@@ -57,7 +57,6 @@ model_pipeline.fit(X_train, y_train)
 with open('car_price_predictor_model.pkl', 'wb') as f:
     pickle.dump(model_pipeline, f)
 
-# Load predefined answers (could be a CSV or a dictionary)
 answers_dict = {
     'mileage': "Mileage refers to the distance a car can travel per unit of fuel. It's usually measured in kilometers per liter (km/l) or miles per gallon (mpg).",
     'fuel': "Fuel type refers to the kind of fuel a car uses. Common types are petrol, diesel, and electric.",
