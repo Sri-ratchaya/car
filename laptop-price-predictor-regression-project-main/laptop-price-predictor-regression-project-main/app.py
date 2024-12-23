@@ -78,14 +78,19 @@ engine = st.number_input('Engine Capacity (in CC)', min_value=800, max_value=500
 power = st.number_input('Power (in bhp)', min_value=50, max_value=500, step=1)
 seats = st.number_input('Seats', min_value=2, max_value=10, step=1)
 
-# Prediction
 if st.button('Predict Price'):
-    # Prepare data for prediction
-    query = np.array([company, car_type, year, kilometers, fuel_type, transmission, owner_type, engine, power, seats])
-    query = query.reshape(1, -1)
+    # Prepare the data for prediction
+    query = pd.DataFrame([[
+        company, car_type, year, kilometers, fuel_type, transmission, owner_type, engine, power, seats
+    ]], columns=X.columns)  # Ensure query has the same column names as the training data
 
-    # Predict price
-    predicted_price = pipe.predict(query)[0]
+    # Transform the query using the pre-trained pipeline
+    try:
+        predicted_price = pipe.predict(query)[0]
+    except ValueError as e:
+        st.error(f"Error in prediction: {e}")
+        st.stop()
 
-    # Display result
+    # Display the predicted price
     st.title(f"The predicted price of this car is ₹{predicted_price:,.2f}")
+
