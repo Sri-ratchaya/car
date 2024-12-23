@@ -2,10 +2,6 @@ import pandas as pd
 import numpy as np
 import pickle
 import streamlit as st
-import pandas as pd
-import numpy as np
-import pickle
-import streamlit as st
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
@@ -15,9 +11,6 @@ from sklearn.impute import SimpleImputer
 
 # Load the dataset from the CSV file
 data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/car predict 2025 assum.csv')
-
-
-
 
 # Combine `Brand` and `Model` into `Name`
 data['Name'] = data['Brand'] + ' ' + data['Model']
@@ -85,12 +78,17 @@ def run_streamlit_app():
     fuel_type = st.selectbox('Fuel Type', ['Petrol', 'Diesel'])
     transmission = st.selectbox('Transmission', ['Manual', 'Automatic'])
 
+    # Prepare the input data for prediction
+    query = pd.DataFrame({
+        'Name': [company],
+        'Year': [year],
+        'Mileage': [mileage],
+        'Fuel_Type': [fuel_type],
+        'Transmission': [transmission]
+    })
+
     # Predict the price when the user clicks the button
     if st.button('Predict Price'):
-        # Prepare the data for prediction
-        query = np.array([company, year, mileage, fuel_type, transmission])
-        query = query.reshape(1, -1)  # Ensure it's a 2D array (1 sample, n features)
-
         # Get the predicted price
         predicted_price = int(model.predict(query)[0])  # Get the prediction from the model
 
