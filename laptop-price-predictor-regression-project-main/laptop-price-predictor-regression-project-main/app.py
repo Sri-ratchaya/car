@@ -4,7 +4,7 @@ import pickle
 import streamlit as st
 
 # Load the dataset from the CSV file
-data = pd.read_csv('car_data.csv')
+data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/car predict 2025 assum.csv')
 
 # Combine `Brand` and `Model` into `Name`
 data['Name'] = data['Brand'] + ' ' + data['Model']
