@@ -14,7 +14,7 @@ st.title("Car Price Prediction App")
 st.write("This app predicts the price of a car based on several features such as brand, year, kilometers driven, and more.")
 
 # Collect user inputs for the car's features
-Name= st.selectbox('Car Brand', df['Name'].unique())
+company= st.selectbox('Car Brand', df['Name'].unique())
 car_type = st.selectbox('Car Type', df['Location'].unique())  # Modify as needed based on your dataset
 year = st.number_input('Year of Manufacture', min_value=2000, max_value=2024, step=1)
 kilometers = st.number_input('Kilometers Driven', min_value=0, max_value=500000, step=1000)
