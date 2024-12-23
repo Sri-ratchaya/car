@@ -62,7 +62,7 @@ with open('car_price_predictor_model.pkl', 'wb') as f:
 print("Model training complete and saved as car_price_predictor_model.pkl")
 
 # Load the answers for the chatbot
-answers_df = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/answers.csv')
+answers_df = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/anwers.csv')
 
 # Function to find the answer to a chatbot question
 def get_answer(question):
