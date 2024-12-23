@@ -10,7 +10,11 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
 
 # Load the dataset for car prediction
-data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/car_data_2020_2025.csv')
+try:
+    data = pd.read_csv('./car_data_2020_2025.csv')  # Ensure correct path
+    print("Data loaded successfully.")
+except Exception as e:
+    print(f"Error loading data: {e}")
 
 # Combine `Brand` and `Model` into `Name`
 data['Name'] = data['Brand'] + ' ' + data['Model']
@@ -62,7 +66,11 @@ with open('car_price_predictor_model.pkl', 'wb') as f:
 print("Model training complete and saved as car_price_predictor_model.pkl")
 
 # Load the answers for the chatbot
-answers_df = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/anwers.csv')
+try:
+    answers_df = pd.read_csv('./answers.csv')  # Ensure correct path
+    print("Answers loaded successfully.")
+except Exception as e:
+    print(f"Error loading answers: {e}")
 
 # Function to find the answer to a chatbot question
 def get_answer(question):
@@ -75,8 +83,12 @@ def get_answer(question):
 # Streamlit App Code
 def run_streamlit_app():
     # Load the trained model
-    with open('car_price_predictor_model.pkl', 'rb') as f:
-        model = pickle.load(f)
+    try:
+        with open('car_price_predictor_model.pkl', 'rb') as f:
+            model = pickle.load(f)
+        print("Model loaded successfully.")
+    except Exception as e:
+        print(f"Error loading model: {e}")
 
     # Set up the title and description of the web app
     st.title("Car Price Prediction and Chatbot App")
@@ -99,10 +111,18 @@ def run_streamlit_app():
         'Transmission': [transmission]
     })
 
+    # Debugging: print the input query
+    print("Input query for prediction:")
+    print(query)
+
     # Predict the price when the user clicks the button
     if st.button('Predict Price'):
-        predicted_price = int(model.predict(query)[0])  # Get the prediction from the model
-        st.subheader(f"The predicted price of this car is ₹{predicted_price}")
+        try:
+            predicted_price = int(model.predict(query)[0])  # Get the prediction from the model
+            st.subheader(f"The predicted price of this car is ₹{predicted_price}")
+        except Exception as e:
+            print(f"Error during prediction: {e}")
+            st.subheader("Sorry, there was an error during prediction.")
 
     # Chatbot Section
     st.header("Chat with the Bot")
