@@ -9,7 +9,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
 
-# Load the dataset from the CSV file
+# Load the dataset for car prediction
 data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/car_data_2020_2025.csv')
 
 # Combine `Brand` and `Model` into `Name`
@@ -61,6 +61,17 @@ with open('car_price_predictor_model.pkl', 'wb') as f:
 
 print("Model training complete and saved as car_price_predictor_model.pkl")
 
+# Load the answers for the chatbot
+answers_df = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/answers.csv')
+
+# Function to find the answer to a chatbot question
+def get_answer(question):
+    answer_row = answers_df[answers_df['Question'].str.contains(question, case=False, na=False)]
+    if not answer_row.empty:
+        return answer_row['Answer'].values[0]
+    else:
+        return "Sorry, I didn't understand that. Can you please rephrase?"
+
 # Streamlit App Code
 def run_streamlit_app():
     # Load the trained model
@@ -68,10 +79,11 @@ def run_streamlit_app():
         model = pickle.load(f)
 
     # Set up the title and description of the web app
-    st.title("Car Price Prediction App")
-    st.write("This app predicts the price of a car based on several features such as brand, year, mileage, and more.")
+    st.title("Car Price Prediction and Chatbot App")
+    st.write("This app predicts the price of a car based on several features such as brand, year, mileage, fuel type, transmission, and more. You can also chat with me and ask questions about cars!")
 
-    # Collect user inputs for the car's features
+    # Car Price Prediction Section
+    st.header("Car Price Prediction")
     company = st.selectbox('Car Brand and Model', ['Toyota Corolla', 'Honda Civic', 'Ford Focus', 'BMW 3 Series', 'Audi A4', 'Mercedes Benz C-Class', 'Volkswagen Golf', 'Hyundai Elantra', 'Kia Seltos', 'Nissan Altima'])
     year = st.number_input('Year of Manufacture', min_value=2000, max_value=2025, step=1)
     mileage = st.number_input('Mileage (in Km)', min_value=0.0, max_value=500000.0, step=0.1)
@@ -89,11 +101,16 @@ def run_streamlit_app():
 
     # Predict the price when the user clicks the button
     if st.button('Predict Price'):
-        # Get the predicted price
         predicted_price = int(model.predict(query)[0])  # Get the prediction from the model
+        st.subheader(f"The predicted price of this car is ₹{predicted_price}")
 
-        # Display the predicted price
-        st.title(f"The predicted price of this car is ₹{predicted_price}")
+    # Chatbot Section
+    st.header("Chat with the Bot")
+    user_question = st.text_input("Ask me a question about cars!")
+
+    if user_question:
+        answer = get_answer(user_question)
+        st.write(answer)
 
 # Running Streamlit app
 if __name__ == "__main__":
