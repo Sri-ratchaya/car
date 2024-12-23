@@ -10,13 +10,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
 
 # Load the dataset for car prediction
-try:
-    data = pd.read_csv('./car_data_2020_2025.csv')  # Ensure correct path
-    print("Data loaded successfully.")
-except Exception as e:
-    print(f"Error loading data: {e}")
-
-# Combine `Brand` and `Model` into `Name`
+data = pd.read_csv('./car_data_2020_2025.csv')  # Ensure correct path
 data['Name'] = data['Brand'] + ' ' + data['Model']
 data.drop(['Brand', 'Model'], axis=1, inplace=True)
 
@@ -63,38 +57,32 @@ model_pipeline.fit(X_train, y_train)
 with open('car_price_predictor_model.pkl', 'wb') as f:
     pickle.dump(model_pipeline, f)
 
-print("Model training complete and saved as car_price_predictor_model.pkl")
-
-# Load the answers for the chatbot (ensure path is correct)
-try:
-    answers_df = pd.read_csv('./answers.csv')  # Ensure correct path
-    print("Answers loaded successfully.")
-except Exception as e:
-    print(f"Error loading answers: {e}")
+# Load predefined answers (could be a CSV or a dictionary)
+answers_dict = {
+    'mileage': "Mileage refers to the distance a car can travel per unit of fuel. It's usually measured in kilometers per liter (km/l) or miles per gallon (mpg).",
+    'fuel': "Fuel type refers to the kind of fuel a car uses. Common types are petrol, diesel, and electric.",
+    'price': "The price of a car depends on various factors like the year, mileage, fuel type, and brand.",
+    'year': "The year of manufacture indicates how old the car is and can affect its value."
+}
 
 # Function to find the answer to a chatbot question
 def get_answer(question):
-    # Make sure the answers_df is accessible globally
-    if 'answers_df' not in globals():
-        print("Answers DataFrame not loaded.")
-        return "Sorry, I didn't understand that. Can you please rephrase?"
+    # Convert the question to lowercase for easy matching
+    question_lower = question.lower()
     
-    # Now, perform the lookup
-    answer_row = answers_df[answers_df['Question'].str.contains(question, case=False, na=False)]
-    if not answer_row.empty:
-        return answer_row['Answer'].values[0]
-    else:
-        return "Sorry, I didn't understand that. Can you please rephrase?"
+    # Search for keywords in the question
+    for keyword, answer in answers_dict.items():
+        if keyword in question_lower:
+            return answer
+    
+    # Default response if no match found
+    return "Sorry, I didn't understand that. Can you please rephrase?"
 
 # Streamlit App Code
 def run_streamlit_app():
     # Load the trained model
-    try:
-        with open('car_price_predictor_model.pkl', 'rb') as f:
-            model = pickle.load(f)
-        print("Model loaded successfully.")
-    except Exception as e:
-        print(f"Error loading model: {e}")
+    with open('car_price_predictor_model.pkl', 'rb') as f:
+        model = pickle.load(f)
 
     # Set up the title and description of the web app
     st.title("Car Price Prediction and Chatbot App")
@@ -117,18 +105,10 @@ def run_streamlit_app():
         'Transmission': [transmission]
     })
 
-    # Debugging: print the input query
-    print("Input query for prediction:")
-    print(query)
-
     # Predict the price when the user clicks the button
     if st.button('Predict Price'):
-        try:
-            predicted_price = int(model.predict(query)[0])  # Get the prediction from the model
-            st.subheader(f"The predicted price of this car is ₹{predicted_price}")
-        except Exception as e:
-            print(f"Error during prediction: {e}")
-            st.subheader("Sorry, there was an error during prediction.")
+        predicted_price = int(model.predict(query)[0])  # Get the prediction from the model
+        st.subheader(f"The predicted price of this car is ₹{predicted_price}")
 
     # Chatbot Section
     st.header("Chat with the Bot")
