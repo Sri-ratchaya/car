@@ -28,13 +28,13 @@ engine = st.number_input('Engine Capacity (in CC)', min_value=800, max_value=500
 power = st.number_input('Power (in bhp)', min_value=50, max_value=500, step=1)
 seats = st.number_input('Seats', min_value=2, max_value=10, step=1)
 
-# Predict the price when the user clicks the button
+ Predict the price when the user clicks the button
 if st.button('Predict Price'):
     # Prepare the data for prediction
     query = np.array([company, car_type, year, kilometers, fuel_type, transmission, owner_type, engine, power, seats])
     query = query.reshape(1, 10)  # Ensure the correct shape for the model
-    
-    # Apply scaling to the query (if needed)
+
+    # Apply scaling to the query (this assumes the scaler has been properly trained and is loaded correctly)
     query_scaled = scaler.transform(query)
 
     # Get the predicted price
