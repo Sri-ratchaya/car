@@ -10,7 +10,7 @@ pipe = pickle.load(open('laptop-price-predictor-regression-project-main/laptop-p
 scaler = pickle.load(open('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/scaler.pkl', 'rb'))
 
 # Load the car dataset for user inputs
-car_data = pd.read_csv('dataset.csv')  # Adjust path if necessary
+car_data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/dataset.csv')  # Adjust path if necessary
 
 # Set up the title and description of the web app
 st.title("Car Price Prediction App")
