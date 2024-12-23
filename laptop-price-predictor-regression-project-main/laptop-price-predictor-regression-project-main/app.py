@@ -77,18 +77,29 @@ owner_type = st.selectbox('Owner Type', car_data['Owner_Type'].unique())
 engine = st.number_input('Engine Capacity (in CC)', min_value=800, max_value=5000, step=50)
 power = st.number_input('Power (in bhp)', min_value=50, max_value=500, step=1)
 seats = st.number_input('Seats', min_value=2, max_value=10, step=1)
-
 if st.button('Predict Price'):
     # Prepare the data for prediction
-    query = pd.DataFrame([[
-        company, car_type, year, kilometers, fuel_type, transmission, owner_type, engine, power, seats
-    ]], columns=X.columns)  # Ensure query has the same column names as the training data
+    query_data = {
+        'Name': [company],
+        'Location': [car_type],
+        'Year': [year],
+        'Kilometers_Driven': [kilometers],
+        'Fuel_Type': [fuel_type],
+        'Transmission': [transmission],
+        'Owner_Type': [owner_type],
+        'Engine': [engine],
+        'Power': [power],
+        'Seats': [seats]
+    }
+    
+    # Ensure the column names match those in the training data
+    query = pd.DataFrame(query_data, columns=X.columns)  # Use X.columns to maintain order and count
 
-    # Transform the query using the pre-trained pipeline
+    # Transform the query using the pipeline
     try:
         predicted_price = pipe.predict(query)[0]
     except ValueError as e:
-        st.error(f"Error in prediction: {e}")
+        st.error(f"Error during prediction: {e}")
         st.stop()
 
     # Display the predicted price
