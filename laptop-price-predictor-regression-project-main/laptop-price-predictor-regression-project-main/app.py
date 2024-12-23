@@ -6,8 +6,8 @@ import streamlit as st
 import pickle
 
 # Load the pre-trained model and scaler
-pipe = pickle.load(open('rf_model.pk1', 'rb'))
-df = pickle.load(open('scaler.pkl', 'rb'))
+pipe = pickle.load(open('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/rf_model.pkl', 'rb'))
+df = pickle.load(open('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/scaler.pkl', 'rb'))
 
 # Set up the title and description of the web app
 st.title("Car Price Prediction App")
