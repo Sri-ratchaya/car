@@ -1,7 +1,5 @@
-import datetime
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import streamlit as st
 import pickle
 
@@ -10,7 +8,7 @@ pipe = pickle.load(open('laptop-price-predictor-regression-project-main/laptop-p
 scaler = pickle.load(open('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/scaler.pkl', 'rb'))
 
 # Load the car dataset for user inputs
-car_data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/dataset.csv')  # Adjust path if necessary
+car_data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/dataset.csv')   # Adjust path if necessary
 
 # Set up the title and description of the web app
 st.title("Car Price Prediction App")
@@ -32,10 +30,14 @@ seats = st.number_input('Seats', min_value=2, max_value=10, step=1)
 if st.button('Predict Price'):
     # Prepare the data for prediction
     query = np.array([company, car_type, year, kilometers, fuel_type, transmission, owner_type, engine, power, seats])
-    query = query.reshape(1, 10)  # Ensure the correct shape for the model
+    query = query.reshape(1, -1)  # Ensure it's a 2D array (1 sample, n features)
 
-    # Apply scaling to the query (this assumes the scaler has been properly trained and is loaded correctly)
-    query_scaled = scaler.transform(query)
+    # Apply scaling
+    try:
+        query_scaled = scaler.transform(query)
+    except AttributeError:
+        st.error("Scaler object is not the correct type.")
+        st.stop()
 
     # Get the predicted price
     predicted_price = int(np.exp(pipe.predict(query_scaled)[0]))  # Assuming the model expects log-transformed prices
