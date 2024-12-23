@@ -11,11 +11,12 @@ from sklearn.ensemble import RandomForestRegressor
 import pickle
 
 # Load your data
+# Load your data
 car_data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/dataset.csv') 
 
 # Extract features and target
-X = df.drop('Price', axis=1)
-y = df['Price']
+X = car_data.drop('Price', axis=1)
+y = car_data['Price']
 
 # Define numeric and categorical columns
 numeric_features = ['Year', 'Kilometers_Driven', 'Engine', 'Power', 'Seats']
