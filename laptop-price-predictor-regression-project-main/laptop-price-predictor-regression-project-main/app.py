@@ -1,4 +1,5 @@
 import openai
+import streamlit as st
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -10,7 +11,20 @@ from sklearn.ensemble import RandomForestRegressor
 from langchain.prompts import PromptTemplate
 from langchain.llms import OpenAI
 from langchain.chains import LLMChain
-import streamlit as st
+import pickle
+
+# Set your OpenAI API key
+openai.api_key = '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'
+
+
+# Function to interact with OpenAI
+def query_openai(prompt):
+    response = openai.Completion.create(
+        engine="text-davinci-003",  # or whichever engine you prefer
+        prompt=prompt,
+        max_tokens=100
+    )
+    return response.choices[0].text.strip()
 
 # Example for loading and preprocessing the car data
 car_data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/car_data_2020_2025.csv')
@@ -55,7 +69,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 model.fit(X_train, y_train)
 
 # Saving the trained model
-import pickle
 with open('car_price_predictor_model.pkl', 'wb') as f:
     pickle.dump(model, f)
 
@@ -101,10 +114,9 @@ if st.button("Predict Car Price"):
     # Use the LangChain LLM to predict the price
     price_prediction = llm_chain.run(car_description)
     
-    st.subheader(f"Predicted Car Price: {price_prediction}")
+    st.subheader(f"Predicted Car Price (LangChain Model): {price_prediction}")
 
     # Alternatively, you can use your trained Random Forest model
-    # To use your trained model to predict the car price (if needed)
     input_data = pd.DataFrame({
         'Name': [car_name],
         'Year': [year],
@@ -113,4 +125,8 @@ if st.button("Predict Car Price"):
         'Transmission': [transmission]
     })
     predicted_price = model.predict(input_data)[0]
-    st.write(f"Predicted Car Price (using trained model): {predicted_price:.2f} USD")
+    st.write(f"Predicted Car Price (Trained Random Forest Model): {predicted_price:.2f} USD")
+
+    # Optionally, query OpenAI (for extra info or interaction)
+    openai_response = query_openai(f"Based on the car details: {car_description}, what would be the expected price of the car?")
+    st.write(f"OpenAI's Take on Car Price: {openai_response}")
