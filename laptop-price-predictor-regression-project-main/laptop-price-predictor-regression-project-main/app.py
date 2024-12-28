@@ -19,7 +19,7 @@ import pickle
 load_dotenv()
 
 # Set your OpenAI API key securely
- os.getenv("OPENAI_API_KEY")= "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
+os.getenv("OPENAI_API_KEY")= "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
 "  
 
 # Function to interact with OpenAI
