@@ -191,7 +191,11 @@ def get_answer(question):
     for keyword, answer in answers_dict.items():
         if keyword in question_lower:
             return answer
-    
+    # Search in car_inventory if no answer is found in answers_dict
+    for car in car_data:
+        for key, value in car.items():
+            if str(value).lower() in question_lower:
+                return car
     # Default response if no match found
     return "Sorry, I didn't understand that. Can you please rephrase?"
 
