@@ -183,19 +183,22 @@ cars_data = [
     {"Brand": "Mercedes", "Model": "Benz C-Class", "Year": 2025, "Mileage": 16.3, "Fuel_Type": "Petrol", "Transmission": "Manual", "Price": 369064.4},
 ]
 # Function to find the answer to a chatbot question
+# Function to find the answer to a chatbot question
 def get_answer(question):
     # Convert the question to lowercase for easy matching
     question_lower = question.lower()
     
-    # Search for keywords in the question
+    # Search for keywords in the predefined answers dictionary
     for keyword, answer in answers_dict.items():
         if keyword in question_lower:
             return answer
+    
     # Search in car_inventory if no answer is found in answers_dict
     for car in car_data:
         for key, value in car.items():
             if str(value).lower() in question_lower:
-                return car
+                return f"Here is the car information: {car}"
+    
     # Default response if no match found
     return "Sorry, I didn't understand that. Can you please rephrase?"
 
