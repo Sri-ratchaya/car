@@ -20,7 +20,7 @@ load_dotenv()
 import os
 
 # Set the environment variable directly
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "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"
 
 # Now you can access the API key using os.getenv or directly pass it to the LangChain model
 
