@@ -1,4 +1,6 @@
+from dotenv import load_dotenv
 import openai
+import os
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -13,8 +15,11 @@ from langchain.llms import OpenAI
 from langchain.chains import LLMChain
 import pickle
 
-# Set your OpenAI API key
+# Load environment variables from .env file
+load_dotenv()
 
+# Set your OpenAI API key securely
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Function to interact with OpenAI
 def query_openai(prompt):
@@ -87,7 +92,7 @@ What would be the expected price of the car in USD?
 """
 
 template = PromptTemplate(input_variables=["car_name", "fuel_type", "transmission", "mileage", "year"], template=prompt)
-llm = OpenAI(temperature=0, model="gpt-4", openai_api_key="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")
+llm = OpenAI(temperature=0, model="gpt-4", openai_api_key=openai.api_key)
 
 # Create an LLMChain
 llm_chain = LLMChain(prompt=template, llm=llm)
