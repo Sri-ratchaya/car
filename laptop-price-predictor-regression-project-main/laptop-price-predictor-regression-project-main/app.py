@@ -126,6 +126,11 @@ answers_dict = {
     'good evening': "Good evening! I'm here to answer all your car questions, feel free to ask anything.",
     'what is your name': "I’m your car assistant! You can call me CarBot. I'm here to help with anything car-related.",
     'tell me more about you': "I'm CarBot, your friendly assistant! I can help you with car prices, features, and all sorts of car-related questions. Just ask!"
+     'thank you': "You are very welcome! I'm always here to help."
+    'ok': "Glad to hear that! If you need any more assistance, feel free to ask.",
+    'fine': "That's great! Let me know if you have more questions.",
+    'thanks': "You're welcome! I'm here if you need anything else.",
+    'thank': "You're very welcome! Feel free to ask anything else."
 }
 cars_data = [
     {"Brand": "Hyundai", "Model": "Elantra", "Year": 2023, "Mileage": 15.7, "Fuel_Type": "Petrol", "Transmission": "Manual", "Price": 2031807.2},
