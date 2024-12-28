@@ -13,7 +13,7 @@ from langchain.chains import LLMChain
 import streamlit as st
 
 # Example for loading and preprocessing the car data
-car_data = pd.read_csv(')
+car_data = pd.read_csv('laptop-price-predictor-regression-project-main/laptop-price-predictor-regression-project-main/car_data_2020_2025.csv')
 
 # Combining 'Brand' and 'Model' into a 'Name' column
 car_data['Name'] = car_data['Brand'] + ' ' + car_data['Model']
