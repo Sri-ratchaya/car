@@ -6,5 +6,5 @@ matplotlib
 openai
 langchain
 langchain-community
-dotenv
+
 
