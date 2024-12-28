@@ -130,7 +130,12 @@ answers_dict = {
     'ok': "Glad to hear that! If you need any more assistance, feel free to ask.",
     'fine': "That's great! Let me know if you have more questions.",
     'thanks': "You're welcome! I'm here if you need anything else.",
-    'thank': "You're very welcome! Feel free to ask anything else."
+    'thank': "You're very welcome! Feel free to ask anything else.",
+    'good bye': "Goodbye! It was a pleasure helping you. Have a great day!",
+    'tata ': "Tata! See you next time. Take care!",
+    'Bye ': "Bye! See you next time. Take care!"
+    
+
 }
 cars_data = [
     {"Brand": "Hyundai", "Model": "Elantra", "Year": 2023, "Mileage": 15.7, "Fuel_Type": "Petrol", "Transmission": "Manual", "Price": 2031807.2},
